@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ShipmentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('shipments')->group(function () {
+    Route::post('/', [ShipmentController::class, 'create']);
+    Route::get('/{id}', [ShipmentController::class, 'show']);
+    Route::put('/{id}/status', [ShipmentController::class, 'updateStatus']);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
