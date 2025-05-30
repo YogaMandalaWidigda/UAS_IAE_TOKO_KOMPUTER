@@ -31,10 +31,4 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
- 'user_service' => [
-    'customer_url' => env('USER_SERVICE_URL'),
-],
-'product_service' => [
-    'product_url' => env('PRODUCT_SERVICE_URL'),
-],
 ];

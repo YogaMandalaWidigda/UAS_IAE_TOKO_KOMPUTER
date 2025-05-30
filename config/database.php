@@ -93,46 +93,6 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
-        'mysql_CUSTOMER' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST_CUSTOMER', '127.0.0.1'),
-            'port' => env('DB_PORT_CUSTOMER', '3306'),
-            'database' => env('DB_DATABASE_CUSTOMER', 'forge'),
-            'username' => env('DB_USERNAME_CUSTOMER', 'forge'),
-            'password' => env('DB_PASSWORD_CUSTOMER', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
-        'mysql_PRODUCT' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST_PRODUCT', '127.0.0.1'),
-            'port' => env('DB_PORT_PRODUCT', '3306'),
-            'database' => env('DB_DATABASE_PRODUCT', 'forge'),
-            'username' => env('DB_USERNAME_PRODUCT', 'forge'),
-            'password' => env('DB_PASSWORD_PRODUCT', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
     ],
 
     /*
