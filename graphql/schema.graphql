@@ -1,0 +1,40 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+type Payment {
+  id: ID!
+  payment_methods: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+# -------------------------
+# Query
+# -------------------------
+type Query {
+  payments: [Payment!]!          # GET all payments
+  payment(id: ID!): Payment      # GET a single payment by ID
+}
+
+# -------------------------
+# Mutation
+# -------------------------
+type Mutation {
+  createPayment(payment_methods: String!): Payment!       # POST
+  updatePayment(id: ID!, payment_methods: String!): Payment!  # PUT
+  deletePayment(id: ID!): String!                         # DELETE
+}
+
+type Query {
+  payments: [Payment!]! @field(resolver: "App\\GraphQL\\Queries\\PaymentQuery@all")
+  payment(id: ID!): Payment @field(resolver: "App\\GraphQL\\Queries\\PaymentQuery@find")
+}
+
+type Mutation {
+  createPayment(payment_methods: String!): Payment! @field(resolver: "App\\GraphQL\\Mutations\\PaymentMutation@create")
+
+  updatePayment(id: ID!,payment_methods: String!): Payment! @field(resolver: "App\\GraphQL\\Mutations\\PaymentMutation@update")
+
+  deletePayment(id: ID!): String! @field(resolver: "App\\GraphQL\\Mutations\\PaymentMutation@delete")
+}
+
