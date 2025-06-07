@@ -1,0 +1,38 @@
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+type Product {
+  product_id: ID!
+  product_name: String!
+  brand: String!
+  chategory: String!
+  price: Int!
+  stock: Int!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+type Query {
+  products: [Product!]! @field(resolver: "App\\GraphQL\\Queries\\ProductQuery@all")
+  product(id: ID!): Product @field(resolver: "App\\GraphQL\\Queries\\ProductQuery@find")
+}
+
+type Mutation {
+  createProduct(
+    product_name: String!
+    brand: String!
+    chategory: String!
+    price: Int!
+    stock: Int!
+  ): Product! @field(resolver: "App\\GraphQL\\Mutations\\ProductMutation@create")
+
+  updateProduct(
+    product_id: ID!
+    product_name: String
+    brand: String
+    chategory: String
+    price: Int
+    stock: Int
+  ): Product! @field(resolver: "App\\GraphQL\\Mutations\\ProductMutation@update")
+
+  deleteProduct(id: ID!): String! @field(resolver: "App\\GraphQL\\Mutations\\ProductMutation@delete")
+}
