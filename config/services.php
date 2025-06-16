@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'order_service' => [
+    'graphql_url' => env('ORDER_SERVICE_GRAPHQL_URL', 'http://localhost:8003/graphql'),
+],
+
 ];

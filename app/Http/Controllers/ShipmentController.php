@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 class ShipmentController extends Controller
 {
     // Membuat data pengiriman baru
+public function getAllOrders()
+{
+    // Contoh: ambil semua data order dari database
+    $orders = Order::all(); // Pastikan model Order sudah ada dan sesuai
+    return response()->json($orders);
+}
+    // Mendapatkan data order dari Order Service menggunakan GraphQL
+    public function getOrderFromOrderService($customerId, \App\Services\OrderGraphQLService $orderGraphQLService)
+    {
+        $orders = $orderGraphQLService->getOrdersByCustomer($customerId);
+        return response()->json($orders);
+    }
     public function create(Request $request)
     {
         $validated = $request->validate([
