@@ -11,7 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -20,60 +19,58 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_laravel_shipment`
 --
--- ...existing code...
-
-CREATE DATABASE IF NOT EXISTS `db_laravel_shipment` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `db_laravel_shipment`
+  DEFAULT CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 USE `db_laravel_shipment`;
 
--- Tabel orders
+-- --------------------------------------------------------
+
+-- Tabel `orders`
+-- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `orders` (
-  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `order_number` varchar(50) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  AUTO_INCREMENT=5;
 
 INSERT INTO `orders` (`order_id`, `order_number`, `created_at`, `updated_at`) VALUES
-  (101, 'ORD20250530001', NOW(), NOW()),
-  (102, 'ORD20250530002', NOW(), NOW()),
-  (103, 'ORD20250530003', NOW(), NOW()),
-  (104, 'ORD20250530004', NOW(), NOW()),
-  (105, 'ORD20250530005', NOW(), NOW());
+  (1, 'ORD20250530001', NOW(), NOW()),
+  (2, 'ORD20250530002', NOW(), NOW()),
+  (3, 'ORD20250530003', NOW(), NOW()),
+  (4, 'ORD20250530004', NOW(), NOW());
 
--- Tabel shipments
-CREATE TABLE `shipments` (
-  `shipment_id` bigint(20) UNSIGNED NOT NULL,
+-- --------------------------------------------------------
+
+-- Tabel `shipments`
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `shipments` (
+  `shipment_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `order_id` bigint(20) UNSIGNED NOT NULL,
-  `tracking_number` varchar(255) NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'pending',
   `carrier` varchar(255) NOT NULL,
   `estimated_delivery` datetime DEFAULT NULL,
-  `actual_delivery` datetime DEFAULT NULL,
   `shipping_address` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-ALTER TABLE `shipments`
-  ADD PRIMARY KEY (`shipment_id`),
-  ADD UNIQUE KEY `shipments_tracking_number_unique` (`tracking_number`),
-  ADD KEY `shipments_order_id_foreign` (`order_id`);
-
-ALTER TABLE `shipments`
-  ADD CONSTRAINT `shipments_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE;
-
-ALTER TABLE `shipments`
-  MODIFY `shipment_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`shipment_id`),
+  KEY `shipments_order_id_foreign` (`order_id`),
+  CONSTRAINT `shipments_order_id_foreign`
+    FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
+    ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  AUTO_INCREMENT=5;
 
 INSERT INTO `shipments`
-  (`order_id`, `tracking_number`, `status`, `carrier`, `estimated_delivery`, `actual_delivery`, `shipping_address`, `created_at`, `updated_at`)
+  (`order_id`, `status`, `carrier`, `estimated_delivery`, `shipping_address`, `created_at`, `updated_at`)
 VALUES
-  (101, 'TRK20250530001', 'pending', 'JNE', '2025-06-05 10:00:00', NULL, 'Jl. Merdeka No.1, Jakarta Pusat', '2025-05-30 08:00:00','2025-05-30 08:00:00'),
-  (102, 'TRK20250530002', 'in_transit', 'TIKI', '2025-06-04 15:30:00', NULL, 'Jl. Sudirman No.45, Jakarta Selatan', '2025-05-30 09:15:00','2025-05-30 09:15:00'),
-  (103, 'TRK20250530003', 'shipped', 'POS Indonesia', '2025-06-03 18:00:00', NULL, 'Jl. Thamrin No.88, Jakarta Pusat', '2025-05-30 10:20:00','2025-05-30 10:20:00'),
-  (104, 'TRK20250530004', 'delivered', 'J&T Express', '2025-06-02 14:00:00', '2025-06-02 13:45:00', 'Jl. Kebon Sirih No.22, Jakarta Pusat', '2025-05-30 11:30:00','2025-05-30 11:30:00'),
-  (105, 'TRK20250530005', 'pending', 'SiCepat', '2025-06-06 09:00:00', NULL, 'Jl. Gatot Subroto No.10, Jakarta Selatan', '2025-05-30 12:45:00','2025-05-30 12:45:00');
+  (1, 'pending',     'JNE',           '2025-06-05 10:00:00', 'Jl. Merdeka No.1, Jakarta Pusat',    '2025-05-30 08:00:00', '2025-05-30 08:00:00'),
+  (2, 'in_transit',  'TIKI',          '2025-06-04 15:30:00', 'Jl. Sudirman No.45, Jakarta Selatan', '2025-05-30 09:15:00', '2025-05-30 09:15:00'),
+  (3, 'shipped',     'POS Indonesia', '2025-06-03 18:00:00', 'Jl. Thamrin No.88, Jakarta Pusat',    '2025-05-30 10:20:00', '2025-05-30 10:20:00'),
+  (4, 'delivered',   'J&T Express',   '2025-06-02 14:00:00', 'Jl. Kebon Sirih No.22, Jakarta Pusat','2025-05-30 11:30:00', '2025-05-30 11:30:00');
 
 COMMIT;
 
