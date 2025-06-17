@@ -30,18 +30,17 @@ USE `db_laravel_shipment`;
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `orders` (
   `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `order_number` varchar(50) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   AUTO_INCREMENT=5;
 
-INSERT INTO `orders` (`order_id`, `order_number`, `created_at`, `updated_at`) VALUES
-  (1, 'ORD20250530001', NOW(), NOW()),
-  (2, 'ORD20250530002', NOW(), NOW()),
-  (3, 'ORD20250530003', NOW(), NOW()),
-  (4, 'ORD20250530004', NOW(), NOW());
+INSERT INTO `orders` (`order_id`, `created_at`, `updated_at`) VALUES
+  (1, NOW(), NOW()),
+  (2, NOW(), NOW()),
+  (3, NOW(), NOW()),
+  (4, NOW(), NOW());
 
 -- --------------------------------------------------------
 
