@@ -1,0 +1,46 @@
+type Order {
+  order_id: ID!
+  customer_id: ID!
+  product_id: ID!
+  customer_name: String!
+  product_name: String!
+  quantity: Int!
+  price: Float!
+  total_price: Float!
+  payment_methods: String
+  payment: Payment
+  shipment_types: ID
+  name_shipment_type: String
+  shipment: ShipmentType
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type Payment {
+  id: ID!
+  payment_methods: String!
+}
+
+type ShipmentType {
+  shipment_types: ID!
+  name_shipment_type: String!
+}
+
+type Query {
+  orders: [Order!]!
+  order(id: ID!): Order
+  ordersByCustomer(customer_id: ID!): [Order!]!
+}
+
+input CreateOrderInput {
+  customer_id: ID!
+  product_id: ID!
+  quantity: Int!
+  payment_methods: String!
+  shipment_types: ID!
+}
+
+type Mutation {
+  createOrder(input: CreateOrderInput!): Order!
+  deleteOrder(id: ID!): String!
+}
