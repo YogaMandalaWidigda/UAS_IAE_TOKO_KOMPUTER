@@ -9,7 +9,7 @@ class CreateShipmentsTable extends Migration
     public function up()
     {
         Schema::create('shipments', function (Blueprint $table) {
-            $table->id();
+            $table->id('shipment_id');
             $table->unsignedBigInteger('order_id');
             $table->string('address');
             $table->string('status')->default('pending');
