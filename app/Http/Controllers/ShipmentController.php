@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
 {
+public function getAllShipments()
+{
+    $shipments = \App\Models\Shipment::all();
+    return response()->json($shipments);
+}
+
     // Membuat data pengiriman baru
 public function getAllOrders()
 {

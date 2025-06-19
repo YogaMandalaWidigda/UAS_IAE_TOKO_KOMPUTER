@@ -29,6 +29,6 @@ Route::prefix('shipments')->group(function () {
     Route::put('/{id}/status', [ShipmentController::class, 'updateStatus']);
     Route::get('/orders/customer/{customer_id}', [OrderController::class, 'getOrderFromOrderService']);
     Route::get('/orders/all', [OrderController::class, 'getAllOrders']);});
-
+    Route::get('/shipment_id', [ShipmentController::class, 'getAllShipments']);
 
     
